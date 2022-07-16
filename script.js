@@ -1,11 +1,9 @@
 // This function is used to set the three user conditions.
 
 function getUserChoice(userInput) { 
-  //var userInput = prompt("Please type rock, paper or scissors");
-  //userInput = userInput.toLowerCase();
   if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
     return userInput;
-  } else {
+  } else if (userInput !== "rock" || userInput !== "paper" || userInput !== "scissors" || userInput === '') {
     console.log('That was the wrong input, please try again.');
   }
 };
@@ -26,8 +24,7 @@ function computerPlay () {
 // This function determines the winner by comparing the player and computers choice.
 
 function playRound(playerSelection, computerSelection) {
-
-  if (playerSelection == computerSelection) {
+    if (playerSelection == computerSelection) {
     return 'This round is a draw';
   }
 
@@ -59,10 +56,12 @@ the player or computer each round depending on the condition.*/
 function game() {
     let userScore = 0;
     let computerScore = 0;
-    
+    let rounds = 0;
+
   for(i = 0; i <= 4; i ++) {
+    rounds = i + 1;
     const computerSelection = computerPlay();
-    var userInput = prompt("Please type rock, paper or scissors");
+    var userInput = prompt("Please type rock, paper or scissors").toLowerCase();
     let playerSelection = getUserChoice(userInput);
 
     if (playerSelection == "rock" && computerSelection == "paper") {
@@ -75,7 +74,7 @@ function game() {
       computerScore++;
     } else if (playerSelection == "scissors" && computerSelection == "paper") {
       userScore++;
-    }
+    } 
     
     if (playerSelection == "scissors" && computerSelection == "rock") {
       computerScore++;
@@ -83,6 +82,7 @@ function game() {
       userScore++;
     }
     
+    console.log("Round: " + rounds);
     console.log("User Choice: " + playerSelection);
     console.log("The Computer Choice: " + computerSelection);
     console.log(playRound(playerSelection, computerSelection));
