@@ -1,11 +1,12 @@
 // This function is used to set the three user conditions.
 
-function getUserChoice(userInput) { 
-  if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
-    return userInput;
-  } else if (userInput !== "rock" || userInput !== "paper" || userInput !== "scissors" || userInput === '') {
-    console.log('That was the wrong input, please try again.');
+function getUserChoice () { 
+  playerSelection = prompt("Please type rock, paper or scissors").toLowerCase();
+
+  while (playerSelection !== "paper" && playerSelection !== "rock" && playerSelection !== "scissors") {
+    playerSelection = prompt("That input was incorrect. Please try again.").toLowerCase();
   }
+  return playerSelection;
 };
 
 // This function is used to randomly generate the computers choice.
@@ -23,8 +24,9 @@ function computerPlay () {
 
 // This function determines the winner by comparing the player and computers choice.
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection == computerSelection) {
+function playRound(playerSelection, computerSelection) { 
+  
+  if (playerSelection == computerSelection) {
     return 'This round is a draw';
   }
 
@@ -60,32 +62,31 @@ function game() {
 
   for(i = 0; i <= 4; i ++) {
     rounds = i + 1;
+    const playerInput = getUserChoice();
     const computerSelection = computerPlay();
-    var userInput = prompt("Please type rock, paper or scissors").toLowerCase();
-    let playerSelection = getUserChoice(userInput);
 
-    if (playerSelection == "rock" && computerSelection == "paper") {
+    if (playerInput == "rock" && computerSelection == "paper") {
       computerScore++;
-    } else if (playerSelection == "paper" && computerSelection == "rock") {
+    } else if (playerInput == "paper" && computerSelection == "rock") {
       userScore++;
-    }
+    } 
 
-    if (playerSelection == "paper" && computerSelection == "scissors") {
+    if (playerInput == "paper" && computerSelection == "scissors") {
       computerScore++;
-    } else if (playerSelection == "scissors" && computerSelection == "paper") {
+    } else if (playerInput == "scissors" && computerSelection == "paper") {
       userScore++;
     } 
     
-    if (playerSelection == "scissors" && computerSelection == "rock") {
+    if (playerInput == "scissors" && computerSelection == "rock") {
       computerScore++;
-    } else if (playerSelection == "rock" && computerSelection == "scissors") {
+    } else if (playerInput == "rock" && computerSelection == "scissors") {
       userScore++;
     }
-    
+
     console.log("Round: " + rounds);
-    console.log("User Choice: " + playerSelection);
+    console.log("User Choice: " + playerInput);
     console.log("The Computer Choice: " + computerSelection);
-    console.log(playRound(playerSelection, computerSelection));
+    console.log(playRound(playerInput, computerSelection));
     console.log("Player Score: " + userScore);
     console.log("Computer Score: " + computerScore);
     console.log("\n");
